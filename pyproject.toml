@@ -4,7 +4,8 @@ requires = [
     "cmake>=3.18",
     "ninja",
     "pybind11",
-    "ug4py-base>=0.1.5"
+    "ug4py-base>=0.1.5",
+    "mpi4py"
 ]
 build-backend = "scikit_build_core.build"
 
@@ -18,14 +19,24 @@ readme = {file = "README.md", content-type = "text/markdown"}
 
 [tool.scikit-build]
 #  cf. https://github.com/scikit-build/scikit-build-core
+logging.level = "DEBUG"
 
+[tool.scikit-build.cmake]
 # The versions of CMake to allow. If CMake is not present on the system or does
 # not pass this specifier, it will be downloaded via PyPI if possible. An empty
 # string will disable this check.
-cmake.version = ">=3.15"
-cmake.source-dir = "ug4-git/plugins/XBraidForUG4"  # ← final CMakeLists.txt will be in this subdir!
 
-# Setting DUG_ROOT_CMAKE_PATH is important!
-cmake.args=['-DBUILD_WITH_PIP=ON', '-DCMAKE_POSITION_INDEPENDENT_CODE=ON', '-DTARGET=libug4','-DPARALLEL:BOOL=OFF','-DUSE_PYBIND11:BOOL=ON', '-DSTATIC_BUILD:BOOL=ON','-DCPU=ALL', '-DCPU=1'] 
-
-logging.level = "DEBUG"
+version = ">=3.15"
+source-dir = "ug4-git/plugins/XBraidForUG4"  # ← final CMakeLists.txt will be in this subdir!
+args = [
+  "-DBUILD_WITH_PIP=ON",
+  "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
+  "-DTARGET=libug4",
+  "-DPARALLEL:BOOL=ON",
+  "-DCMAKE_C_COMPILER=mpicc",
+  "-DCMAKE_CXX_COMPILER=mpicxx",
+  "-DUSE_PYBIND11:BOOL=ON",
+  "-DSTATIC_BUILD:BOOL=ON",
+  "-DCPU=ALL",
+  "-DCPU=1" 
+]
