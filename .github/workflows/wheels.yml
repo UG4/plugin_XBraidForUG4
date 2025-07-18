@@ -26,11 +26,13 @@ jobs:
           mkdir ug4-git/plugins
           mkdir ug4-git/plugins/XBraidForUG4
           shopt -s dotglob
-          mv * ug4-git/plugins/XBraidForUG4
+          for item in * .[!.]* ..?*; do
+            [[ "$item" == "ug4-git" || "$item" == "pyproject.toml" ]] && continue
+            mv "$item" ug4-git/plugins/XBraidForUG4
+          done
           shopt -u dotglob
           ls -l .
           ls -l ug4-git/plugins/XBraidForUG4
-          mv ug4-git/plugins/XBraidForUG4/pyproject.toml .
         continue-on-error: true
 
       - name: Checkout ughub
