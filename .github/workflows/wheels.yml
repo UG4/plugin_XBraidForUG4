@@ -28,6 +28,8 @@ jobs:
           shopt -s dotglob
           mv * ug4-git/plugins/XBraidForUG4
           shopt -u dotglob
+          ls -l .
+          ls -l ug4-git/plugins/XBraidForUG4
           mv ug4-git/plugins/XBraidForUG4/pyproject.toml .
         continue-on-error: true
 
