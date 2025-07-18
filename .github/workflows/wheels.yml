@@ -20,7 +20,7 @@ jobs:
         with:
           submodules: true
 
-      - name: Move sources to 'ug4-git/plugins/XBraidForUG4'.
+      - name: Move sources (except for pyproject.toml) to 'ug4-git/plugins/XBraidForUG4'.
         run: |
           mkdir ug4-git
           mkdir ug4-git/plugins
@@ -28,6 +28,7 @@ jobs:
           shopt -s dotglob
           mv * ug4-git/plugins/XBraidForUG4
           shopt -u dotglob
+          mv ug4-git/plugins/XBraidForUG4/pyproject.toml .
         continue-on-error: true
 
       - name: Checkout ughub
