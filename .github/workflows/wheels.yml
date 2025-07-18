@@ -61,11 +61,15 @@ jobs:
           CIBW_BUILD_VERBOSITY:  1
           CIBW_BUILD: cp312-*
           CIBW_SKIP: "*-win32 *-musllinux_* *linux_i686 *linux_s390x *linux_aarch64 *linux_s390x" 
+          CIBW_BEFORE_ALL: >
+            pwd && ls
           CIBW_BEFORE_ALL_LINUX: > 
-            pwd && ls && 
-            export UG4_ROOT=$PWD/ug4-git
+            export UG4_ROOT=$PWD/ug4-git && env && 
+            sudo apt-get update &&
+            sudo apt-get install -y ibopenmpi-dev openmpi-bin
           CIBW_BEFORE_ALL_MACOS: > 
-            pwd && ls && which python && env
+            export UG4_ROOT=$PWD/ug4-git && which python && env &&
+            brew update && brew install open-mpi
           CMAKE_ARGS: >-
             ${{ contains(matrix.os, 'ubuntu') && '-DUG_ROOT_CMAKE_PATH=/project/ug4-git/ugcore/cmake' || 
              contains(matrix.os, 'windows') && '-DUG_ROOT_CMAKE_PATH=C:/a/plugin_XBraidForUG4/plugin_XBraidForUG4/ug4-git/ugcore/cmake' || 
