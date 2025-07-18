@@ -20,14 +20,14 @@ jobs:
         with:
           submodules: true
 
-      - name: Move sources (except for pyproject.toml) to 'ug4-git/plugins/XBraidForUG4'.
+      - name: Move sources (except for pyproject.toml, README.md) to 'ug4-git/plugins/XBraidForUG4'.
         run: |
           mkdir ug4-git
           mkdir ug4-git/plugins
           mkdir ug4-git/plugins/XBraidForUG4
           shopt -s dotglob
           for item in * .[!.]* ..?*; do
-            [[ "$item" == "ug4-git" || "$item" == "pyproject.toml" ]] && continue
+            [[ "$item" == "ug4-git" || "$item" == "pyproject.toml" || "$item" == "README.md"  ]] && continue
             mv "$item" ug4-git/plugins/XBraidForUG4
           done
           shopt -u dotglob
