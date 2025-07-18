@@ -65,7 +65,7 @@ jobs:
             pwd && ls
           CIBW_BEFORE_ALL_LINUX: > 
             export UG4_ROOT=$PWD/ug4-git && env &&
-            apt-get install openmpi-bin openmpi-common libopenmpi-dev
+            yum install -y openmpi openmpi-devel
           CIBW_BEFORE_ALL_MACOS: > 
             export UG4_ROOT=$PWD/ug4-git && which python && env &&
             brew install open-mpi
