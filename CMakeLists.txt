@@ -249,8 +249,9 @@ endif ()
 # ---------------------------------------------------------------------------------------------------------------------
 
 message(STATUS "UG_ROOT_CMAKE_PATH: ${UG_ROOT_CMAKE_PATH}")
+message(STATUS "UG4_ROOT: ${UG4_ROOT}")
 if(NOT UG_ROOT_CMAKE_PATH)
-    set(UG_ROOT_CMAKE_PATH /storage/pro/ug/ugcore/cmake)
+    set(UG_ROOT_CMAKE_PATH ${UG4_ROOT}/ugcore/cmake)
 endif(NOT UG_ROOT_CMAKE_PATH)
 
 include(${UG_ROOT_CMAKE_PATH}/ug_plugin_includes.cmake)
