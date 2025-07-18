@@ -1,0 +1,22 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025:  Goethe University Frankfurt
+ * SPDX-License-Identifier: LicenseRef-UG4-LGPL-3.0
+ *
+ * Author: Martin Parnet, Arne Naegel
+ *
+ */
+#pragma once
+
+#include "bridge/util.h"
+extern "C" void InitUGPlugin_XBraidForUG4(ug::bridge::Registry* reg, std::string grp);
+
+
+#ifdef UG_USE_PYBIND11
+#include "bindings/pybind/ug_pybind.h"
+
+namespace ug {
+namespace xbraid{
+	void InitUGPlugin(ug::pybind::Registry* reg, std::string grp);
+}
+}
+#endif

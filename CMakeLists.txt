@@ -255,7 +255,10 @@ endif(NOT UG_ROOT_CMAKE_PATH)
 
 include(${UG_ROOT_CMAKE_PATH}/ug_plugin_includes.cmake)
 
-
+################################################################################
+# Classic binding (static or dynamic plugin).
+################################################################################
+if(NOT USE_PYBIND11)
 if (buildEmbeddedPlugins)
     exportsources(${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES})
     exportsources(${CMAKE_CURRENT_SOURCE_DIR} ${BRAIDSOURCES})
@@ -279,6 +282,25 @@ else (buildEmbeddedPlugins)
 
     target_include_directories(${pluginName}  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..) # Make plugin folder available
 endif (buildEmbeddedPlugins)
+endif(NOT USE_PYBIND11)
 
+################################################################################
+# Python binding (static plugin, dynamic python interface).
+################################################################################
+if(USE_PYBIND11)
+	# Create a STATIC library for UG4 stuff from the sources
+	add_library(${pluginName} STATIC ${SOURCES})
+    include_directories(${pluginName} PUBLIC "${CMAKE_SOURCE_DIR}/plugins/${pluginName}")
+    target_include_directories(${pluginName}  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..) # Make plugin folder available
+	
+	SET(myPluginSources bridge/pybind.cpp)
+	SET(myLibraries ug4 ${pluginName})
+	
+	# First argument must match module name in PYBIND11_MODULE call
+	python_add_library(pyxbraid MODULE  ${myPluginSources} ${SOURCES} WITH_SOABI)
+	target_link_libraries (pyxbraid PRIVATE ${pluginName} ug4_s)
+	set_target_properties(pyxbraid PROPERTIES INSTALL_RPATH "$ORIGIN/..:$ORIGIN/../../../lib")
+	install(TARGETS pyxbraid LIBRARY DESTINATION ug4py COMPONENT pymodules)
+endif(USE_PYBIND11)
 
 
