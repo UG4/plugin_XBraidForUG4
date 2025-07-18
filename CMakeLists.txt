@@ -37,9 +37,9 @@ project(UG_PLUGIN_${pluginName})
 
 
 
-if(NOT UG_ROOT_CMAKE_PATH)
-    set(UG_ROOT_CMAKE_PATH /storage/pro/ug/ugcore/cmake)
-endif(NOT UG_ROOT_CMAKE_PATH)
+#if(NOT UG_ROOT_CMAKE_PATH)
+#    set(UG_ROOT_CMAKE_PATH /storage/pro/ug/ugcore/cmake)
+#endif(NOT UG_ROOT_CMAKE_PATH)
 
 
 #set(CMAKE_CXX_STANDARD 17)
