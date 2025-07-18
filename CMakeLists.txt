@@ -248,7 +248,7 @@ endif ()
 
 # ---------------------------------------------------------------------------------------------------------------------
 
-
+message(STATUS "UG_ROOT_CMAKE_PATH: ${UG_ROOT_CMAKE_PATH}")
 if(NOT UG_ROOT_CMAKE_PATH)
     set(UG_ROOT_CMAKE_PATH /storage/pro/ug/ugcore/cmake)
 endif(NOT UG_ROOT_CMAKE_PATH)
