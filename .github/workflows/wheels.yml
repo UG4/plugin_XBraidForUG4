@@ -64,12 +64,9 @@ jobs:
           CIBW_BEFORE_ALL: >
             pwd && ls
           CIBW_BEFORE_ALL_LINUX: > 
-            export UG4_ROOT=$PWD/ug4-git && env && 
-            sudo apt-get update &&
-            sudo apt-get install -y ibopenmpi-dev openmpi-bin
+            export UG4_ROOT=$PWD/ug4-git && env 
           CIBW_BEFORE_ALL_MACOS: > 
-            export UG4_ROOT=$PWD/ug4-git && which python && env &&
-            brew update && brew install open-mpi
+            export UG4_ROOT=$PWD/ug4-git && which python && env 
           CMAKE_ARGS: >-
             ${{ contains(matrix.os, 'ubuntu') && '-DUG_ROOT_CMAKE_PATH=/project/ug4-git/ugcore/cmake' || 
              contains(matrix.os, 'windows') && '-DUG_ROOT_CMAKE_PATH=C:/a/plugin_XBraidForUG4/plugin_XBraidForUG4/ug4-git/ugcore/cmake' || 
