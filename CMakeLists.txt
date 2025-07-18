@@ -291,7 +291,7 @@ endif(NOT USE_PYBIND11)
 if(USE_PYBIND11)
 	# Create a STATIC library for UG4 stuff from the sources
 	add_library(${pluginName} STATIC ${SOURCES})
-   	tartget_include_directories(${pluginName} PUBLIC ${CMAKE_SOURCE_DIR})
+   	target_include_directories(${pluginName} PUBLIC ${CMAKE_SOURCE_DIR})
     	target_include_directories(${pluginName}  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..) # Make plugin folder available
 	
 	SET(myPluginSources bridge/pybind.cpp)
